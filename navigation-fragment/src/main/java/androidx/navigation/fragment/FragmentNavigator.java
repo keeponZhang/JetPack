@@ -56,6 +56,7 @@ import java.util.Map;
  * (i.e., in callbacks to {@link NavController.OnDestinationChangedListener}).
  */
 @Navigator.Name("fragment")
+// 查看注释我们知道它是为每个Navigation设置策略的，也就是说Fragment之间通过导航切换都是由它来操作的，下面会详细介绍的，这里先简单看下
 public class FragmentNavigator extends Navigator<FragmentNavigator.Destination> {
     private static final String TAG = "FragmentNavigator";
     private static final String KEY_BACK_STACK_IDS = "androidx-nav-fragment:navigator:backStackIds";

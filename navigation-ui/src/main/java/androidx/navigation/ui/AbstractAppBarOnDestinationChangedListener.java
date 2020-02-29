@@ -101,16 +101,26 @@ abstract class AbstractAppBarOnDestinationChangedListener
                 }
             }
             matcher.appendTail(title);
+            //设置title
             setTitle(title);
         }
         boolean isTopLevelDestination = NavigationUI.matchDestinations(destination,
                 mTopLevelDestinations);
         if (drawerLayout == null && isTopLevelDestination) {
+            //设置icon
             setNavigationIcon(null, 0);
         } else {
+            //设置返回箭头状态
             setActionBarUpIndicator(drawerLayout != null && isTopLevelDestination);
         }
     }
+
+    // 原来如此，到这里就应该清楚了，当我们切换Fragment时，大概流程如下：
+    // 切换目标fragment到栈顶 分发目标Fragment切换状态
+    // 设置toolbar的标题、icon状态等
+    // 当然setTitle()、setNavigationIcon()等都为抽象方法，具体实现可以看子类里是怎么实现的，具体就不叙述了
+    //
+    //
 
     private void setActionBarUpIndicator(boolean showAsDrawerIndicator) {
         boolean animate = true;

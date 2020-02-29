@@ -176,6 +176,8 @@ public final class Navigation {
     @SuppressWarnings("unchecked")
     @Nullable
     private static NavController getViewNavController(@NonNull View view) {
+        // 查看代码可以看到是通过一个tag值来找到的，那么什么时候设置的呢？还记得3.1里面介绍的NavHostFragment的生命周期onViewCreated么？
+        //返回的是NavHostFragment创建的NavController
         Object tag = view.getTag(R.id.nav_controller_view_tag);
         NavController controller = null;
         if (tag instanceof WeakReference) {

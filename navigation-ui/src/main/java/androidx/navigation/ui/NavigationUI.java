@@ -85,6 +85,7 @@ public final class NavigationUI {
         NavOptions options = builder.build();
         try {
             //TODO provide proper API instead of using Exceptions as Control-Flow.
+            //最后还是调用navigate()方法,并且将MenuItem的ID作为参数传递过去
             navController.navigate(item.getItemId(), null, options);
             return true;
         } catch (IllegalArgumentException e) {
@@ -524,6 +525,7 @@ public final class NavigationUI {
                 });
         final WeakReference<BottomNavigationView> weakReference =
                 new WeakReference<>(bottomNavigationView);
+        // 可以看到它就是调用了目标切换的那个接口，用来实现标题按钮等状态的改变
         navController.addOnDestinationChangedListener(
                 new NavController.OnDestinationChangedListener() {
                     @Override

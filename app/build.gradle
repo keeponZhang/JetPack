@@ -22,7 +22,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':androidx-annotation')
-    implementation ("androidx.appcompat:appcompat:1.1.0",{
+    implementation ("androidx.appcompat:appcompat:{rootProject.ext.appCompatVersion}",{
             exclude group: 'androidx.annotation', module: 'annotation'
             exclude group: 'androidx.collection', module: 'collection'
             })
@@ -39,6 +39,7 @@ dependencies {
     implementation project(path: ':navigation-ui')
     implementation project(path: ':navigation-fragment')
     implementation project(path: ':navigation-runtime')
+    implementation project(path: ':navigation-common')
 
     implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0",{
         exclude group: 'androidx.annotation', module: 'annotation'

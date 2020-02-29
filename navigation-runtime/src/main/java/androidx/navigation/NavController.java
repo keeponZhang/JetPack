@@ -281,6 +281,7 @@ public class NavController {
         boolean popped = false;
         for (Navigator navigator : popOperations) {
             if (navigator.popBackStack()) {
+                // 果真remove掉了之前所有的naviagtor
                 NavBackStackEntry entry = mBackStack.removeLast();
                 if (mViewModel != null) {
                     mViewModel.clear(entry.mId);
@@ -369,6 +370,7 @@ public class NavController {
             NavBackStackEntry backStackEntry = mBackStack.peekLast();
             for (OnDestinationChangedListener listener :
                     mOnDestinationChangedListeners) {
+                // 分发了所有实现了OnDestinationChangedListener
                 listener.onDestinationChanged(this, backStackEntry.getDestination(),
                         backStackEntry.getArguments());
             }
@@ -452,6 +454,7 @@ public class NavController {
      */
     @CallSuper
     public void setGraph(@NonNull NavGraph graph, @Nullable Bundle startDestinationArgs) {
+        // 我们看如果设置的graph不为null，它执行了popBackStackInternal，看注释的意思为从之前的就的graph栈弹出所有的graph
         if (mGraph != null) {
             // Pop everything from the old graph off the back stack
             popBackStackInternal(mGraph.getId(), true);
@@ -756,12 +759,16 @@ public class NavController {
             if (navOptions == null) {
                 navOptions = navAction.getNavOptions();
             }
+            //这里会再次赋值，所以navigation传actionId和destinationId都行
+            Log.e("TAG", "NavController navigate 这里会再次赋值，所以navigation传actionId和destinationId都行:" );
             destId = navAction.getDestinationId();
             Bundle navActionArgs = navAction.getDefaultArguments();
             if (navActionArgs != null) {
                 combinedArgs = new Bundle();
                 combinedArgs.putAll(navActionArgs);
             }
+        }else{
+            Log.e("TAG", "NavController navigate navAction === null:" );
         }
 
         if (args != null) {
@@ -780,7 +787,7 @@ public class NavController {
             throw new IllegalArgumentException("Destination id == 0 can only be used"
                     + " in conjunction with a valid navOptions.popUpTo");
         }
-
+        //根据menu id查询目标页面
         NavDestination node = findDestination(destId);
         if (node == null) {
             final String dest = NavDestination.getDisplayName(mContext, destId);
@@ -877,6 +884,7 @@ public class NavController {
             }
             // Now ensure all intermediate NavGraphs are put on the back stack
             // to ensure that global actions work.
+            // 如果NavGraph不在栈内，先拿到父类Navgarph
             ArrayDeque<NavBackStackEntry> hierarchy = new ArrayDeque<>();
             NavDestination destination = newDest;
             while (destination != null && findDestination(destination.getId()) == null) {
@@ -890,10 +898,12 @@ public class NavController {
             // And finally, add the new destination with its default args
             NavBackStackEntry newBackStackEntry = new NavBackStackEntry(newDest,
                     newDest.addInDefaultArgs(finalArgs), mViewModel);
+            //添加新的 destination
             mBackStack.add(newBackStackEntry);
         }
         updateOnBackPressedCallbackEnabled();
         if (popped || newDest != null) {
+            // 分发目标界面切换
             dispatchOnDestinationChanged();
         }
     }

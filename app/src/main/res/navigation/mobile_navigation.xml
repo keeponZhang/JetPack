@@ -5,13 +5,12 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
-
-<!--argument 创建fragment需要传入的参数-->
-<!--action 当前fragment跳转至下一个目标页的动作-->
-<!--deepLink 可以通过uri的方式拉起当前页面  -->
+    <!--argument 创建fragment需要传入的参数-->
+    <!--action 当前fragment跳转至下一个目标页的动作-->
+    <!--deepLink 可以通过uri的方式拉起当前页面  -->
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.zhang.jetpack.ui.home.HomeFragment"
+        android:name="com.zhang.jetpack.ui.home.AppHomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <argument
@@ -29,8 +28,11 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.zhang.jetpack.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
+        tools:layout="@layout/fragment_dashboard">
+        <deepLink
+            android:id="@+id/deepLink2"
+            app:uri="www.keepon.com" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.zhang.jetpack.ui.notifications.NotificationsFragment"

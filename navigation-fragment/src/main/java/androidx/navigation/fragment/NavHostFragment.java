@@ -192,6 +192,7 @@ public class NavHostFragment extends Fragment implements NavHost {
         // TODO This feature should probably be a first-class feature of the Fragment system,
         // but it can stay here until we can add the necessary attr resources to
         // the fragment lib.
+        // 在onAttach生命周期开启事务将它自己设置成了PrimaryFragment了，当然通过defaultNavHost
         if (mDefaultNavHost) {
             requireFragmentManager().beginTransaction()
                     .setPrimaryNavigationFragment(this)
@@ -214,6 +215,7 @@ public class NavHostFragment extends Fragment implements NavHost {
                 mIsPrimaryBeforeOnCreate != null && mIsPrimaryBeforeOnCreate);
         mIsPrimaryBeforeOnCreate = null;
         mNavController.setViewModelStore(getViewModelStore());
+        // 在onCreate生命周期中创建了一个NavController，并且为这个NavController创建了一个_Navigator__添加了进去
         onCreateNavController(mNavController);
 
         Bundle navState = null;
@@ -236,6 +238,7 @@ public class NavHostFragment extends Fragment implements NavHost {
             mNavController.setGraph(mGraphId);
         } else {
             // See if it was set by NavHostFragment.create()
+            // 接下来我们看到为NavController设置了setGraph()，也就是我们xml里面定义的navGraph，导航布局里面的Fragment及action跳转等信息
             final Bundle args = getArguments();
             final int graphId = args != null ? args.getInt(KEY_GRAPH_ID) : 0;
             final Bundle startDestinationArgs = args != null
