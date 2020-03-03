@@ -1,5 +1,7 @@
 package com.zhang.jetpack;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -14,6 +16,11 @@ import androidx.navigation.ui.NavigationUI;
 public class AppMainActivity extends AppCompatActivity {
 
     private NavController mNavController;
+    private Intent mIntent;
+
+    public NavController getNavController() {
+        return mNavController;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +36,20 @@ public class AppMainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, mNavController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, mNavController);
 
+        mIntent = getIntent();
+        mIntent.setData(Uri.parse("http://www.keepon.com"));
         //这样可以直接跳转
-        // navController.handleDeepLink(getIntent());
+        // mNavController.handleDeepLink(mIntent);
     }
 
     public void jump() {
         // NavController navController =
         //         Navigation.findNavController(this, R.id.nav_host_fragment);
-        int nextAction = R.id.action_id;
-        int desId = R.id.navigation_dashboard;
-        mNavController.navigate(nextAction);
+        // int nextAction = R.id.action_id;
+        // int desId = R.id.navigation_dashboard;
+        // mNavController.navigate(nextAction);
+        mNavController.handleDeepLink(mIntent);
+
     }
 
 

@@ -26,6 +26,7 @@ import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.IdRes;
@@ -359,7 +360,10 @@ public class NavDestination {
     @Nullable
     DeepLinkMatch matchDeepLink(@NonNull Uri uri) {
         if (mDeepLinks == null) {
+            Log.w("TAG", "NavDestination matchDeepLink mDeepLinks == null :" );
             return null;
+        }else{
+            Log.e("TAG", "NavDestination matchDeepLink mDeepLinks:"+mDeepLinks +" this="+this );
         }
         DeepLinkMatch bestMatch = null;
         for (NavDeepLink deepLink : mDeepLinks) {
@@ -386,6 +390,9 @@ public class NavDestination {
         NavDestination current = this;
         do {
             NavGraph parent = current.getParent();
+            String navigatorName = current.getDisplayName();
+            Log.e("TAG", "NavDestination buildDeepLinkIds current navigatorName:"+navigatorName+" " +
+                    " parent="+parent +" hierarchy.size="+hierarchy.size());
             if (parent == null || parent.getStartDestination() != current.getId()) {
                 hierarchy.addFirst(current);
             }

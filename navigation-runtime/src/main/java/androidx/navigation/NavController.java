@@ -583,6 +583,8 @@ public class NavController {
             int index = 0;
             while (index < deepLink.length) {
                 int destinationId = deepLink[index++];
+                Log.e("TAG", "NavController buildDeepLinkIds  FLAG_ACTIVITY_NEW_TASK " +
+                        "handleDeepLink :" +deepLink.length);
                 NavDestination node = findDestination(destinationId);
                 if (node == null) {
                     throw new IllegalStateException("unknown destination during deep link: "
@@ -597,6 +599,8 @@ public class NavController {
         NavGraph graph = mGraph;
         for (int i = 0; i < deepLink.length; i++) {
             int destinationId = deepLink[i];
+            Log.e("TAG", "NavController buildDeepLinkIds  Normal " +
+                    "handleDeepLink :" +deepLink.length);
             NavDestination node = i == 0 ? mGraph : graph.findNode(destinationId);
             if (node == null) {
                 throw new IllegalStateException("unknown destination during deep link: "
@@ -612,6 +616,7 @@ public class NavController {
                 }
             } else {
                 // Navigate to the last NavDestination, clearing any existing destinations
+                Log.e("TAG", "NavController buildDeepLinkIds handleDeepLink Navigate to the last NavDestination:" );
                 navigate(node, node.addInDefaultArgs(bundle), new NavOptions.Builder()
                         .setPopUpTo(mGraph.getId(), true)
                         .setEnterAnim(0).setExitAnim(0).build(), null);

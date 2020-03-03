@@ -1,5 +1,6 @@
 package com.zhang.jetpack.ui.home;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,13 @@ public class AppHomeFragment extends Fragment {
             public void onClick(View v) {
                 AppMainActivity mainActivity = (AppMainActivity) getActivity();
                 mainActivity.jump();
+            }
+        });
+        root.findViewById(R.id.deepLink).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppMainActivity appMainActivity = (AppMainActivity) getActivity();
+                appMainActivity.getNavController().navigate(Uri.parse("http://www.keepon.com"));
             }
         });
         return root;

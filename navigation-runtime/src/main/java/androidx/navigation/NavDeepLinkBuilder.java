@@ -22,6 +22,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NavigationRes;
@@ -167,6 +168,7 @@ public final class NavDeepLinkBuilder {
         possibleDestinations.add(mGraph);
         while (!possibleDestinations.isEmpty() && node == null) {
             NavDestination destination = possibleDestinations.poll();
+            Log.e("TAG", "NavDeepLinkBuilder buildDeepLinkIds  fillInIntent:" );
             if (destination.getId() == mDestId) {
                 node = destination;
             } else if (destination instanceof NavGraph) {
@@ -177,6 +179,7 @@ public final class NavDeepLinkBuilder {
         }
         if (node == null) {
             final String dest = NavDestination.getDisplayName(mContext, mDestId);
+            Log.e("TAG", "NavDeepLinkBuilder fillInIntent dest:" +dest);
             throw new IllegalArgumentException("navigation destination " + dest
                     + " is unknown to this NavController");
         }

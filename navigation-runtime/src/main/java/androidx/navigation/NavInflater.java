@@ -24,6 +24,7 @@ import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.util.Xml;
 
@@ -100,6 +101,12 @@ public final class NavInflater {
             throws XmlPullParserException, IOException {
         Navigator navigator = mNavigatorProvider.getNavigator(parser.getName());
         final NavDestination dest = navigator.createDestination();
+        if( dest instanceof NavGraph){
+            Log.e("TAG", " 开始--------------NavInflater is NavGraph inflate dest:" +dest);
+        }else{
+            Log.e("TAG", "NavInflater inflate dest:" +dest);
+        }
+
 
         dest.onInflate(mContext, attrs);
 
@@ -118,6 +125,7 @@ public final class NavInflater {
             }
 
             final String name = parser.getName();
+            Log.e("TAG", "NavInflater inflate name:" +name);
             if (TAG_ARGUMENT.equals(name)) {
                 inflateArgumentForDestination(res, dest, attrs, graphResId);
             } else if (TAG_DEEP_LINK.equals(name)) {
@@ -133,7 +141,11 @@ public final class NavInflater {
                 ((NavGraph) dest).addDestination(inflate(res, parser, attrs, graphResId));
             }
         }
-
+        if( dest instanceof NavGraph){
+            Log.e("TAG", " 结束--------------return  dest:" +dest);
+        }else{
+            Log.e("TAG", "NavInflater inflate return dest:" +dest);
+        }
         return dest;
     }
 
@@ -275,6 +287,7 @@ public final class NavInflater {
                     + "> must include an app:uri");
         }
         uri = uri.replace(APPLICATION_ID_PLACEHOLDER, mContext.getPackageName());
+        Log.e("TAG", "NavInflater inflateDeepLink uri:" +uri);
         dest.addDeepLink(uri);
         a.recycle();
     }
