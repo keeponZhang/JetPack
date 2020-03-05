@@ -25,17 +25,14 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':navigation-runtime')
     implementation project(path: ':navigation-common')
-    implementation project(path: ':androidx-annotation')
+    implementation "androidx.annotation:annotation:${rootProject.ext.annotationVersion}"
     implementation ("androidx.core:core:${rootProject.ext.androidxCoreVersion}",{
-        exclude group: 'androidx.annotation', module: 'annotation'
         exclude group: 'androidx.collection', module: 'collection'
     })
     implementation ("androidx.lifecycle:lifecycle-viewmodel:${rootProject.ext.androidxLifeCycle}",{
-        exclude group: 'androidx.annotation', module: 'annotation'
         exclude group: 'androidx.collection', module: 'collection'
     })
     implementation ("androidx.fragment:fragment:${rootProject.ext.androidxFragmentVersion}",{
-        exclude group: 'androidx.annotation', module: 'annotation'
         exclude group: 'androidx.collection', module: 'collection'
     })
 }

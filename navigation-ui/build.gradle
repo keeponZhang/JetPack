@@ -24,14 +24,12 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':navigation-runtime')
-    implementation project(path: ':androidx-annotation')
+    implementation "androidx.annotation:annotation:${rootProject.ext.annotationVersion}"
     implementation project(path: ':navigation-common')
     implementation ("com.google.android.material:material:${rootProject.ext.materialVersion}",{
-        exclude group: 'androidx.annotation', module: 'annotation'
         exclude group: 'androidx.collection', module: 'collection'
     })
     implementation ("androidx.transition:transition:${rootProject.ext.androidxTransitionVersion}",{
-        exclude group: 'androidx.annotation', module: 'annotation'
         exclude group: 'androidx.collection', module: 'collection'
     })
 }

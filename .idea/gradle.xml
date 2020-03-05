@@ -10,10 +10,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/androidx-annotation" />
             <option value="$PROJECT_DIR$/androidx-collection" />
-            <option value="$PROJECT_DIR$/androidx-lifecycle-common" />
-            <option value="$PROJECT_DIR$/androidx-lifecycle-livedata" />
-            <option value="$PROJECT_DIR$/androidx-lifecycle-livedata-core" />
-            <option value="$PROJECT_DIR$/androidx-lifecycle-viewmodel" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/navigation-common" />
             <option value="$PROJECT_DIR$/navigation-fragment" />

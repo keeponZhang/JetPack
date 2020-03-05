@@ -9,6 +9,7 @@ buildscript {
         navigationVersion = '2.1.0'
         CONTRANT_LAYOUT_VERSION = '1.1.3'
         GLIDE_VERSION = '3.7.0'
+        annotationVersion = '1.1.0'
 
         androidxCompileSdkVersion = 29
         androidxBuildToolsVersion = "29.0.1"
@@ -32,7 +33,10 @@ buildscript {
     }
     repositories {
         mavenLocal()
-     maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven {
+            url "http://repo.yypm.com:8181/nexus/content/groups/public"
+        }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         google()
         jcenter()
         
@@ -49,7 +53,10 @@ buildscript {
 allprojects {
     repositories {
         mavenLocal()
-     maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven {
+            url "http://repo.yypm.com:8181/nexus/content/groups/public"
+        }
+         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         google()
         jcenter()
         

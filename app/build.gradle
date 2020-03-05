@@ -21,17 +21,13 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path: ':androidx-annotation')
     implementation ("androidx.appcompat:appcompat:{rootProject.ext.appCompatVersion}",{
-            exclude group: 'androidx.annotation', module: 'annotation'
             exclude group: 'androidx.collection', module: 'collection'
             })
     implementation ("com.google.android.material:material:${rootProject.ext.materialVersion}",{
-        exclude group: 'androidx.annotation', module: 'annotation'
         exclude group: 'androidx.collection', module: 'collection'
     })
     implementation ("androidx.constraintlayout:constraintlayout:1.1.3",{
-        exclude group: 'androidx.annotation', module: 'annotation'
         exclude group: 'androidx.collection', module: 'collection'
     })
 //    implementation 'androidx.navigation:navigation-fragment:2.2.1'
@@ -42,7 +38,6 @@ dependencies {
     implementation project(path: ':navigation-common')
 
     implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0",{
-        exclude group: 'androidx.annotation', module: 'annotation'
         exclude group: 'androidx.collection', module: 'collection'
     })
     testImplementation 'junit:junit:4.12'
